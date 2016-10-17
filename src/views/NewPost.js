@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import NewPostForm from '../components/index.js';
+import { NewPostForm } from '../components/index.js';
 
 const styles = {
   outerDiv: {
@@ -15,7 +15,7 @@ class NewPost extends Component {
         <Row>
           <Col sm={10} smOffset={1} md={8} mdOffset={2}>
             <div style={styles.outerDiv}>
-              <h2>Publish new post</h2>
+              <h2>Publish a new post</h2>
               <br />
               <NewPostForm />
             </div>

@@ -28,16 +28,17 @@ const NavigationBar = (props) => (
         <LinkContainer to={`/${props.blogId}/about`}>
           <NavItem eventKey={3}>About</NavItem>
         </LinkContainer>
-        <LinkContainer to={`/${props.blogId}/newpost`}>
+        { props.user !== null && <LinkContainer to={`/${props.blogId}/newpost`}>
           <NavItem eventKey={4}>New post</NavItem>
-        </LinkContainer>
+        </LinkContainer> }
       </Nav>
     </Navbar.Collapse>
   </Navbar>
 )
 
 NavigationBar.propTypes = {
-  blogId: React.PropTypes.string.isRequired
+  blogId: React.PropTypes.string.isRequired,
+  user: React.PropTypes.object
 }
 
 export default NavigationBar;

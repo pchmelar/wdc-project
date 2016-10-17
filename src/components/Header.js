@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 const styles = {
@@ -6,6 +6,10 @@ const styles = {
     height: 150,
     background: 'salmon',
     textAlign: 'center'
+  },
+  headerLink: {
+    color: 'white',
+    textDecoration: 'none'
   },
   blogName: {
     float: 'left',
@@ -20,24 +24,46 @@ const styles = {
     margin: '0 0 0 90%',
     padding: '10px 30px 0 0',
     textAlign: 'right',
-    fontSize: '1.1em'
+    fontSize: '1.1em',
+    color: 'white'
   }
 }
 
-const Header = (props) => (
-  <div style={styles.header}>
-    <div style={styles.blogName}>
-      {props.title}
-    </div>
-    { !props.homepage && <div style={styles.login}>
-      <Link to="/" style={{color: 'white'}}>Log in</Link>
-    </div> }
-  </div>
-)
+class Header extends Component {
+
+  handleLogout = (e) => {
+    e.preventDefault();
+    this.props.onRequestLogout();
+  };
+
+  render() {
+    return (
+      <div style={styles.header}>
+        <div style={styles.blogName}>
+          <Link to={this.props.link} style={styles.headerLink}>{this.props.title}</Link>
+        </div>
+        { !this.props.homepage && <div style={styles.login}>
+          { this.props.user === null ?
+            <Link to="/" style={{color: 'white'}}>
+              Log in
+            </Link>
+            :
+            <a href onClick={this.handleLogout} style={{color: 'white'}}>
+              Log out
+            </a>
+          }
+        </div> }
+      </div>
+    );
+  }
+}
 
 Header.propTypes = {
+  link: React.PropTypes.string.isRequired,
   title: React.PropTypes.string.isRequired,
-  homepage: React.PropTypes.bool.isRequired
+  homepage: React.PropTypes.bool.isRequired,
+  user: React.PropTypes.object,
+  onRequestLogout: React.PropTypes.func
 };
 
 export default Header;

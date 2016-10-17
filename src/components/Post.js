@@ -21,15 +21,15 @@ const Post = (props) => (
 			<div style={styles.outerDiv}>
 				<Row>
 					<Col sm={6}>
-						<h2>{props.post.headline}</h2>
+						<h2>{props.data.title}</h2>
 					</Col>
 					<Col sm={6}>
-						<h4 style={styles.location}>{props.post.location}</h4>
+						<h4 style={styles.location}>{props.data.location.description}</h4>
 					</Col>
 				</Row>
 				<br />
 				<p>
-					{props.post.content}
+					{props.data.content}
 				</p>
 			</div>
 		</Col>
@@ -37,10 +37,14 @@ const Post = (props) => (
 )
 
 Post.propTypes = {
-	post: React.PropTypes.shape({
-    headline: React.PropTypes.string.isRequired,
-    location: React.PropTypes.string.isRequired,
-    content: React.PropTypes.string.isRequired
+	data: React.PropTypes.shape({
+    title: React.PropTypes.string.isRequired,
+    content: React.PropTypes.string.isRequired,
+    location: React.PropTypes.shape({
+    	description: React.PropTypes.string.isRequired,
+    	lat: React.PropTypes.number.isRequired,
+    	lng: React.PropTypes.number.isRequired
+    })
   })
 }
 

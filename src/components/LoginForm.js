@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, ControlLabel, InputGroup, FormControl, HelpBlock, Button, Alert } from 'react-bootstrap';
+import { browserHistory } from 'react-router';
 import axios from 'axios';
 
 const styles = {
@@ -85,7 +86,8 @@ class LoginForm extends Component {
         })
         .then((res) => {
           this.setState({ waitForResponse: false });
-          this.props.onSuccess(res);
+          localStorage.setItem('currentUser', JSON.stringify(res.data));
+          browserHistory.push(res.data.blogid);
         })
         .catch((err) => {
           this.setState({ waitForResponse: false });
@@ -151,9 +153,5 @@ class LoginForm extends Component {
     );
   }
 }
-
-LoginForm.propTypes = {
-  onSuccess: React.PropTypes.func.isRequired
-};
 
 export default LoginForm;
