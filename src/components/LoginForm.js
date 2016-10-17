@@ -23,6 +23,10 @@ class LoginForm extends Component {
     };
   }
 
+  getEmailValidationState() {
+    if (this.state.emailError !== "") return 'error';
+  }
+
   handleEmailChange = (e) => {
     this.setState({
       email: e.target.value,
@@ -37,6 +41,10 @@ class LoginForm extends Component {
       return false;
     }
   };
+
+  getPasswordValidationState() {
+    if (this.state.passwordError !== "") return 'error';
+  }
 
   handlePasswordChange = (e) => {
     this.setState({
@@ -89,7 +97,7 @@ class LoginForm extends Component {
   render() {
     return (
       <Form horizontal noValidate onSubmit={this.handleSubmit}>
-        <FormGroup controlId="email" validationState={this.state.emailError !== '' && 'error'}>
+        <FormGroup controlId="email" validationState={this.getEmailValidationState()}>
           <Col sm={3} componentClass={ControlLabel} style={styles.controlLabel}>
             Email
           </Col>
@@ -110,7 +118,7 @@ class LoginForm extends Component {
             <HelpBlock>{this.state.emailError}</HelpBlock>
           </Col>
         </FormGroup>
-        <FormGroup controlId="password" validationState={this.state.passwordError !== '' && 'error'}>
+        <FormGroup controlId="password" validationState={this.getPasswordValidationState()}>
           <Col sm={3} componentClass={ControlLabel} style={styles.controlLabel}>
             Password
           </Col>
