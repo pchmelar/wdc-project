@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import Header from '../components/Header';
-import NavigationBar from '../components/NavigationBar';
+import { Header, NavigationBar } from '../components/index.js';
 import axios from 'axios';
 
-const outerDivStyles = {
-  height: '100%',
-  // display: 'flex',
-  // flexFlow: 'column'
+const styles = {
+  outerDiv: {
+    height: '100%',
+    // display: 'flex',
+    // flexFlow: 'column'
+  }
 };
 
 class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,10 +19,11 @@ class App extends Component {
       about: ''
     };
   }
+
   componentDidMount() {
-    axios.get('http://localhost:8080/blog/' + this.props.params.blogId)
+    axios.get('https://fierce-ridge-28571.herokuapp.com/blog/' + this.props.params.blogId)
       .then((res) => {
-        this.setState({ 
+        this.setState({
           title: res.data.title,
           about: res.data.about
         });
@@ -29,9 +32,10 @@ class App extends Component {
         console.log(err);
       });
   }
+
   render() {
     return (
-      <div style={outerDivStyles}>
+      <div style={styles.outerDiv}>
         <div className="hidden-xs">
           <Header title={this.state.title} homepage={false} />
         </div>

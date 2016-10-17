@@ -1,7 +1,11 @@
 {
-  "name": "wdc-project-react",
+  "name": "wdc-semestral-client",
   "version": "0.0.1",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pchmelar/wdc-semestral-client.git"
+  },
   "devDependencies": {
     "react-scripts": "0.2.1"
   },

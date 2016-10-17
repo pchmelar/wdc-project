@@ -1,15 +1,17 @@
 import React from 'react';
 import { Col, Form, FormGroup, ControlLabel, InputGroup, FormControl, Button } from 'react-bootstrap';
 
-const labelStyles = {
-  fontWeight: 400,
-  fontSize: '1.10em'
+const styles = {
+  controlLabel: {
+    fontWeight: 400,
+    fontSize: '1.10em'
+  }
 }
 
 const RegForm = (props) => (
   <Form horizontal noValidate>
     <FormGroup>
-      <Col sm={3} componentClass={ControlLabel} style={labelStyles}>
+      <Col sm={3} componentClass={ControlLabel} style={styles.controlLabel}>
         Email
       </Col>
       <Col sm={6}>
@@ -20,7 +22,7 @@ const RegForm = (props) => (
       </Col>
     </FormGroup>
     <FormGroup>
-      <Col sm={3} componentClass={ControlLabel} style={labelStyles}>
+      <Col sm={3} componentClass={ControlLabel} style={styles.controlLabel}>
         Password
       </Col>
       <Col sm={6}>
@@ -31,7 +33,7 @@ const RegForm = (props) => (
       </Col>
     </FormGroup>
     <FormGroup>
-      <Col sm={3} componentClass={ControlLabel} style={labelStyles}>
+      <Col sm={3} componentClass={ControlLabel} style={styles.controlLabel}>
         Password confirm
       </Col>
       <Col sm={6}>

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import NewPostForm from '../components/NewPostForm';
+import NewPostForm from '../components/index.js';
 
-const outerDivStyles = {
-  margin: '30px 0 50px 0'
+const styles = {
+  outerDiv: {
+    margin: '30px 0 50px 0'
+  }
 };
 
 class NewPost extends Component {
@@ -12,7 +14,7 @@ class NewPost extends Component {
       <Grid>
         <Row>
           <Col sm={10} smOffset={1} md={8} mdOffset={2}>
-            <div style={outerDivStyles}>
+            <div style={styles.outerDiv}>
               <h2>Publish new post</h2>
               <br />
               <NewPostForm />

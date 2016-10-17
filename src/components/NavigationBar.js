@@ -2,13 +2,15 @@ import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 
-const navbarStyles = {
-  borderRadius: 0,
-  backgroundColor: '#FFFFFF'
+const styles = {
+  navbar: {
+    borderRadius: 0,
+    backgroundColor: '#FFFFFF'
+  }
 }
 
 const NavigationBar = (props) => (
-  <Navbar style={navbarStyles}>
+  <Navbar style={styles.navbar}>
     <Navbar.Header className="visible-xs">
       <Navbar.Brand>
         <a href="#">React-Bootstrap</a>
