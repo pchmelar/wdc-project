@@ -13,7 +13,7 @@ const NavigationBar = (props) => (
   <Navbar style={styles.navbar}>
     <Navbar.Header className="visible-xs">
       <Navbar.Brand>
-        <a href="#">React-Bootstrap</a>
+        <a href="#">Travel Diary</a>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>

@@ -6,8 +6,12 @@ import axios from 'axios';
 const styles = {
   outerDiv: {
     height: '100%',
-    // display: 'flex',
-    // flexFlow: 'column'
+    display: 'flex',
+    flexFlow: 'column'
+  },
+  content: {
+    flex: '1',
+    overflow: 'scroll'
   }
 };
 
@@ -63,7 +67,9 @@ class App extends Component {
           blogId={this.props.params.blogId} 
           user={this.state.user}
         />
-        {this.props.children}
+        <div style={styles.content}>
+          {this.props.children}
+        </div>
       </div>
     );
   }
