@@ -24,22 +24,34 @@ class App extends Component {
     this.state = {
       user: null,
       title: '',
-      about: ''
+      about: '',
+      posts: []
     };
   }
 
   componentDidMount() {
-
     // try to get the current user from localStorage
     if (localStorage.getItem('currentUser')) {
-      this.setState({user: JSON.parse(localStorage.getItem('currentUser'))});
+      this.setState({ user: JSON.parse(localStorage.getItem('currentUser')) });
     }
 
-    axios.get('https://fierce-ridge-28571.herokuapp.com/blog/' + this.props.params.blogId)
+    // get blog details from API
+    axios.get(`https://fierce-ridge-28571.herokuapp.com/blog/${this.props.params.blogId}`)
       .then((res) => {
         this.setState({
           title: res.data.title,
           about: res.data.about
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // get posts from API
+    axios.get(`https://fierce-ridge-28571.herokuapp.com/blog/${this.props.params.blogId}/post`)
+      .then((res) => {
+        this.setState({
+          posts: res.data
         });
       })
       .catch((err) => {
@@ -70,7 +82,7 @@ class App extends Component {
           user={this.state.user}
         />
         <div style={styles.content}>
-          {this.props.children}
+          {React.cloneElement(this.props.children, { data: this.state })}
         </div>
       </div>
     );
