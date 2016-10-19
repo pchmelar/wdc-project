@@ -80,6 +80,7 @@ class App extends Component {
         <NavigationBar 
           blogId={this.props.params.blogId} 
           user={this.state.user}
+          onRequestLogout={this.handleLogout}
         />
         <div style={styles.content}>
           {React.cloneElement(this.props.children, { data: this.state })}
