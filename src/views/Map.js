@@ -3,8 +3,7 @@ import GoogleMapsLoader from 'google-maps';
 
 const styles = {
   map: {
-    height: 'calc(100% + 20px)',
-    margin: '-20px 0 0 0'
+    height: '100%',
   }
 };
 

@@ -11,7 +11,9 @@ const styles = {
   },
   content: {
     flex: '1',
-    overflow: 'scroll'
+    overflow: 'scroll',
+    height: '100%',
+    margin: '-20px 0 0 0'
   }
 };
 
