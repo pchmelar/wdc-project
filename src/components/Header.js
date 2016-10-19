@@ -40,17 +40,17 @@ class Header extends Component {
     return (
       <div style={styles.header}>
         <div style={styles.blogName}>
-          <Link to={this.props.link} style={styles.headerLink}>{this.props.title}</Link>
+          <Link to={this.props.link} style={styles.headerLink}>{this.props.data.title}</Link>
         </div>
         { !this.props.homepage && <div style={styles.login}>
-          { this.props.user === null ?
-            <Link to="/" style={{color: 'white'}}>
-              Log in
-            </Link>
-            :
+          { this.props.data.owner ?
             <a href onClick={this.handleLogout} style={{color: 'white'}}>
               Log out
             </a>
+            :
+            <Link to="/" style={{color: 'white'}}>
+              Log in
+            </Link>
           }
         </div> }
       </div>
@@ -60,10 +60,12 @@ class Header extends Component {
 
 Header.propTypes = {
   link: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
   homepage: React.PropTypes.bool.isRequired,
-  user: React.PropTypes.object,
-  onRequestLogout: React.PropTypes.func
+  onRequestLogout: React.PropTypes.func,
+  data: React.PropTypes.shape({
+    title: React.PropTypes.string.isRequired,
+    owner: React.PropTypes.bool.isRequired
+  })
 };
 
 export default Header;

@@ -12,8 +12,11 @@ const Homepage = (props) => (
   <div>
     <Header 
       link="/"
-      title="Travel Diary" 
       homepage={true} 
+      data={{
+        owner: false,
+        title: "Travel Diary"
+      }}
     />
     <Grid>
       <div style={styles.outerDiv}>

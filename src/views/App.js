@@ -22,6 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      owner: false,
       user: null,
       title: '',
       about: '',
@@ -32,7 +33,11 @@ class App extends Component {
   componentDidMount() {
     // try to get the current user from localStorage
     if (localStorage.getItem('currentUser')) {
-      this.setState({ user: JSON.parse(localStorage.getItem('currentUser')) });
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.setState({ user: currentUser });
+      if (currentUser.blogid === this.props.params.blogId){
+        this.setState({ owner: true });
+      } 
     }
 
     // get blog details from API
@@ -60,7 +65,10 @@ class App extends Component {
   }
 
   handleLogout = () => {
-    this.setState({ user: null });
+    this.setState({ 
+      owner: false,
+      user: null 
+    });
     localStorage.removeItem('currentUser');
     browserHistory.push(this.props.params.blogId);
   };
@@ -71,16 +79,15 @@ class App extends Component {
         <div className="hidden-xs">
           <Header 
             link={`/${this.props.params.blogId}`} 
-            title={this.state.title} 
             homepage={false} 
-            user={this.state.user}
             onRequestLogout={this.handleLogout}
+            data={this.state}
           />
         </div>
         <NavigationBar 
           blogId={this.props.params.blogId} 
-          user={this.state.user}
           onRequestLogout={this.handleLogout}
+          data={this.state}
         />
         <div style={styles.content}>
           {React.cloneElement(this.props.children, { data: this.state })}

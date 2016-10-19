@@ -53,11 +53,11 @@ class NavigationBar extends Component {
             <LinkContainer to={`/${this.props.blogId}/about`}>
               <NavItem eventKey={3}>About</NavItem>
             </LinkContainer>
-            { this.props.user !== null && <LinkContainer to={`/${this.props.blogId}/newpost`}>
+            { this.props.data.owner && <LinkContainer to={`/${this.props.blogId}/newpost`}>
               <NavItem eventKey={4}>New post</NavItem>
             </LinkContainer> }
             <NavItem eventKey={5} onClick={this.handleLoginLinkClick} className="visible-xs">
-              {this.props.user ? 'Log out' : 'Log in'}
+              {this.props.data.owner ? 'Log out' : 'Log in'}
             </NavItem>
           </Nav>
         </Navbar.Collapse>
@@ -68,8 +68,10 @@ class NavigationBar extends Component {
 
 NavigationBar.propTypes = {
   blogId: React.PropTypes.string.isRequired,
-  user: React.PropTypes.object,
-  onRequestLogout: React.PropTypes.func.isRequired
+  onRequestLogout: React.PropTypes.func.isRequired,
+  data: React.PropTypes.shape({
+    owner: React.PropTypes.bool.isRequired
+  })
 }
 
 export default NavigationBar;

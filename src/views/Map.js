@@ -26,16 +26,16 @@ class Map extends Component {
         center: { lat: 0, lng: 0 },
         zoom: 3
       });
+      this.updateMarkers(this.props.data.posts, map);
       this.setState({ map: map });
     });
-    this.updateMarkers(this.props.data.posts);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.updateMarkers(nextProps.data.posts);
+    this.updateMarkers(nextProps.data.posts, this.state.map);
   }
 
-  updateMarkers = (posts) => {
+  updateMarkers = (posts, map) => {
     GoogleMapsLoader.load((google) => {
       // add markers to the map
       for (const post of posts) {
@@ -44,12 +44,12 @@ class Map extends Component {
             lat: post.location.lat,
             lng: post.location.lng
           },
-          map: this.state.map
+          map: map
         });
       }
       // recenter the map to the first post
       if (posts.length > 0) {
-        this.state.map.setCenter({
+        map.setCenter({
           lat: posts[0].location.lat,
           lng: posts[0].location.lng
         })
