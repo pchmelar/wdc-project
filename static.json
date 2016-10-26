@@ -1,7 +1,1 @@
 // configuration for heroku
-
-{
-  "https_only": true
-}
-
-
