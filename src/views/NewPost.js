@@ -17,13 +17,19 @@ class NewPost extends Component {
             <div style={styles.outerDiv}>
               <h2>Publish a new post</h2>
               <br />
-              <NewPostForm />
+              <NewPostForm user={this.props.data.user}/>
             </div>
           </Col>
         </Row>
       </Grid>
     );
   }
+}
+
+NewPost.propTypes = {
+  data: React.PropTypes.shape({
+    user: React.PropTypes.object
+  })
 }
 
 export default NewPost;

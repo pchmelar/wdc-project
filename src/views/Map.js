@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapsLoader from 'google-maps';
+import axios from 'axios';
 
 const styles = {
   map: {
@@ -9,65 +10,53 @@ const styles = {
 
 class Map extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      map: null
-    };
-  }
-
   componentDidMount() {
-    // setup Google Maps API
-    GoogleMapsLoader.KEY = 'AIzaSyDHRSSM9cBkg4-tkLITA794XWTOUJHM2sw';
-    GoogleMapsLoader.LIBRARIES = ['places'];
-    GoogleMapsLoader.load((google) => {
-      // display the map
-      const map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 0, lng: 0 },
-        zoom: 3
-      });
-      this.updateMarkers(this.props.data.posts, map);
-      this.setState({ map: map });
-    });
-  }
+    // get posts from API
+    axios.get(`https://fierce-ridge-28571.herokuapp.com/blog/${this.props.params.blogId}/post`)
+      .then((res) => {
 
-  componentWillReceiveProps(nextProps) {
-    this.updateMarkers(nextProps.data.posts, this.state.map);
-  }
+        // setup Google Maps API
+        GoogleMapsLoader.KEY = 'AIzaSyDHRSSM9cBkg4-tkLITA794XWTOUJHM2sw';
+        GoogleMapsLoader.LIBRARIES = ['places'];
+        GoogleMapsLoader.load((google) => {
+          // display the map
+          const map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 0, lng: 0 },
+            zoom: 3
+          });
 
-  updateMarkers = (posts, map) => {
-    GoogleMapsLoader.load((google) => {
-      // add markers to the map
-      for (const post of posts) {
-        new google.maps.Marker({
-          position: {
-            lat: post.location.lat,
-            lng: post.location.lng
-          },
-          map: map
+          // add markers to the map
+          for (const post of res.data) {
+            new google.maps.Marker({
+              position: {
+                lat: post.location.lat,
+                lng: post.location.lng
+              },
+              map: map
+            });
+          }
+
+          // recenter the map to the first post
+          if (res.data.length > 0) {
+            map.setCenter({
+              lat: res.data[0].location.lat,
+              lng: res.data[0].location.lng
+            })
+          }
+          
         });
-      }
-      // recenter the map to the first post
-      if (posts.length > 0) {
-        map.setCenter({
-          lat: posts[0].location.lat,
-          lng: posts[0].location.lng
-        })
-      }
-    });
-  };
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
       <div id="map" style={styles.map}></div>
     );
   }
-}
-
-Map.propTypes = {
-  data: React.PropTypes.shape({
-    posts: React.PropTypes.array.isRequired
-  })
 }
 
 export default Map;

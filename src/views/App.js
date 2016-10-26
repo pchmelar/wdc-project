@@ -25,8 +25,7 @@ class App extends Component {
       owner: false,
       user: null,
       title: '',
-      about: '',
-      posts: []
+      about: ''
     };
   }
 
@@ -46,17 +45,6 @@ class App extends Component {
         this.setState({
           title: res.data.title,
           about: res.data.about
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    // get posts from API
-    axios.get(`https://fierce-ridge-28571.herokuapp.com/blog/${this.props.params.blogId}/post`)
-      .then((res) => {
-        this.setState({
-          posts: res.data
         });
       })
       .catch((err) => {

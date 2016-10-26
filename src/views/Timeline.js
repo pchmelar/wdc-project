@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Post } from '../components/index.js';
+import axios from 'axios';
 
 const styles = {
   outerDiv: {
@@ -9,13 +10,34 @@ const styles = {
 };
 
 class Timeline extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: []
+    };
+  }
+
+  componentDidMount() {
+    // get posts from API
+    axios.get(`https://fierce-ridge-28571.herokuapp.com/blog/${this.props.params.blogId}/post`)
+      .then((res) => {
+        this.setState({
+          posts: res.data
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <Grid>
         <Row>
-          <Col sm={12} smOffset={0} md={10} mdOffset={1} lg={8} lgOffset={2}>
+          <Col sm={12} md={10} mdOffset={1} lg={8} lgOffset={2}>
             <div style={styles.outerDiv}>
-              {this.props.data.posts.map(function(object, i){
+              {this.state.posts.map(function(object, i){
                 return <Post data={object} key={i} />;
               })}
             </div>  
@@ -24,12 +46,6 @@ class Timeline extends Component {
       </Grid>
     );
   }
-}
-
-Timeline.propTypes = {
-  data: React.PropTypes.shape({
-    posts: React.PropTypes.array.isRequired
-  })
 }
 
 export default Timeline;

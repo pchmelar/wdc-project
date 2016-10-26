@@ -25,7 +25,7 @@ class LoginForm extends Component {
   }
 
   getEmailValidationState() {
-    if (this.state.emailError !== "") return 'error';
+    if (this.state.emailError !== '') return 'error';
   }
 
   handleEmailChange = (e) => {
@@ -44,7 +44,7 @@ class LoginForm extends Component {
   };
 
   getPasswordValidationState() {
-    if (this.state.passwordError !== "") return 'error';
+    if (this.state.passwordError !== '') return 'error';
   }
 
   handlePasswordChange = (e) => {

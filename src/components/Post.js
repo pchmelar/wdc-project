@@ -17,7 +17,7 @@ const styles = {
 
 const Post = (props) => (
   <Row>
-		<Col sm={10} smOffset={2}>
+		<Col>
 			<div style={styles.outerDiv}>
 				<Row>
 					<Col sm={6}>
